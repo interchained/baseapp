@@ -88,15 +88,15 @@ export const App = () => {
 
     return (
         <IntlProvider locale={lang} messages={getTranslations(lang, isMobileDevice)} key={lang}>
-            <WebSocketProvider>
-                <Router history={browserHistory}>
-                    <ErrorWrapper>
-                        <React.Suspense fallback={null}>
+            <Router history={browserHistory}>
+                <ErrorWrapper>
+                    <React.Suspense fallback={null}>
+                        <WebSocketProvider>
                             <RenderDeviceContainers />
-                        </React.Suspense>
-                    </ErrorWrapper>
-                </Router>
-            </WebSocketProvider>
+                        </WebSocketProvider>
+                    </React.Suspense>
+                </ErrorWrapper>
+            </Router>
         </IntlProvider>
     );
 };
