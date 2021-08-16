@@ -38,6 +38,12 @@ declare global {
         barong_upload_size_min_range?: string;
         barong_upload_size_max_range?: string;
         themeSwitcher: 'visible' | 'hidden';
+        useSharedLayout: string;
+        footerNavigation?: string;
+        footerSocials?: string;
+        navigations?: string;
+        logo_icons?: string;
+        fontFamily?: string;
     }
 
     interface Window {
