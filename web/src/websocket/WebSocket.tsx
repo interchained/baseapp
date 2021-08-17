@@ -36,14 +36,14 @@ export default ({ children }) => {
     }, [currentMarket]);
 
     useEffect(() => {
-        if (!userLoading && !abilitiesLoading) {
+        if (!userLoading && !abilitiesLoading && !socketUrl) {
             const streams = streamsBuilder(userLoggedIn, canReadP2P, currentMarket, location.pathname);
 
             if (streams.length) {
                 setSocketUrl(generateSocketURI(baseUrl(userLoggedIn), streams));
             }
         }
-    }, [userLoggedIn, canReadP2P, currentMarket, userLoading, abilitiesLoading, location]);
+    }, [userLoggedIn, canReadP2P, currentMarket, userLoading, abilitiesLoading, location, socketUrl]);
 
     useEffect(() => {
         if (kline.marketId && kline.period && !kline.loading) {
@@ -78,7 +78,7 @@ export default ({ children }) => {
             setMessages([]);
         },
         onClose: () => {
-            console.log("WebSocket connection closed");
+            window.console.log("WebSocket connection closed");
         },
         onError: error => {
             window.console.log(`WebSocket error ${error}`);
@@ -90,7 +90,21 @@ export default ({ children }) => {
     });
 
     useEffect(() => {
-        if (previousMarket) {
+        if (messages.length) {
+            for (const m of messages) {
+                sendJsonMessage(m);
+            }
+    
+            setMessages([]);
+        }
+    }, [messages]);
+
+    useEffect(() => {
+        // if (currentMarket === previousMarket) {
+        //     return;
+        // }
+
+        if (previousMarket && previousMarket !== currentMarket) {
             unsubscribe(marketStreams(previousMarket).channels);
         }
 
@@ -105,6 +119,7 @@ export default ({ children }) => {
         if (readyState === ReadyState.OPEN) {
             sendJsonMessage(data);
         } else {
+            window.console.log(data);
             setMessages([ ...messages, data ]);
         }
     }, [readyState, messages]);
