@@ -1,10 +1,10 @@
 window.env = {
     api: {
-        authUrl: 'http://localhost:9002/api/v2/barong',
-        tradeUrl: 'http://localhost:9002/api/v2/peatio',
-        applogicUrl: 'http://localhost:9002/api/v2/applogic',
-        rangerUrl: 'ws://localhost:9003/api/v2/ranger',
-        finexUrl: 'http://localhost:9002/api/v2/finex',
+        authUrl: 'http://dex.crystaleum:9002/api/v2/barong',
+        tradeUrl: 'http://dex.crystaleum:9002/api/v2/peatio',
+        applogicUrl: 'http://dex.crystaleum:9002/api/v2/applogic',
+        rangerUrl: 'ws://dex.crystaleum:9003/api/v2/ranger',
+        finexUrl: 'http://dex.crystaleum:9002/api/v2/finex',
     },
     minutesUntilAutoLogout: '5',
     withCredentials: false,
